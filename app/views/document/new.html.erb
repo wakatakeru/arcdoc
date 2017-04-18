@@ -1,0 +1,17 @@
+<h1>ドキュメントの新規作成</h1>
+
+<%= form_for @document, url: document_index_path do |f| %>
+  <div>
+    <%= f.label :title, 'タイトル' %>
+  </div>
+  <div>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :content, '本文' %>
+  </div>
+  <div>
+    <%= f.text_area  :content %>
+  </div>
+    <%= f.submit('作成') %>
+<% end %>
