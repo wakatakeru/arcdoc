@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20170418160917) do
   enable_extension "plpgsql"
 
   create_table "documents", force: :cascade do |t|
-    t.string   "title"
+    t.string   "title",      null: false
     t.text     "content"
     t.string   "author_id"
     t.integer  "tag_id"
@@ -25,14 +25,14 @@ ActiveRecord::Schema.define(version: 20170418160917) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "login_id"
-    t.string   "screen_name"
+    t.string   "login_id",        null: false
+    t.string   "screen_name",     null: false
     t.string   "password_digest"
     t.boolean  "is_admin"
     t.datetime "created_at",      null: false
