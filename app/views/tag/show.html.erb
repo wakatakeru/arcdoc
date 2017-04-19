@@ -1,5 +1,29 @@
 <div class="container">
-  <h1>タグ詳細</h1>
+  <div class="row">
+    <h1>Tag:<%= @tag.name %> ドキュメント一覧</h1>
+  </row>
   <hr>
-  <h2><%= @tag.name %></h2>
+  <div class="form-group">
+    <form action="." method="." class="form-inline">
+      <input type="text" name="search" placeholder="タイトル検索" class="form-control">
+          <input type="submit" value="検索" class="form-control">
+    </form>
+  </div>
+  <table class="table table-hover">
+    <tr>
+      <th>タイトル</th>
+      <th>最終更新日時</th>
+      <th>操作</th>
+    </tr>
+    <% @documents.each do |i| %>
+      <tr>
+        <td><%= link_to i.title, document_path(i.id) %></td>
+        <td><%= i.updated_at %></td>
+        <td>
+          <%= link_to '編集', edit_document_path(i.id), :class => 'btn btn-success btn-xs'%>
+          <%= link_to '削除', document_path(i.id), :method => 'delete', :class => 'btn btn-danger btn-xs', data: {confirm: "#{i.title}を削除します。よろしいですか？"} %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 </div>
