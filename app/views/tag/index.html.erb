@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <h1>タグ一覧 <%= link_to '新規作成', new_tag_path, :class => 'btn btn-primary pull-right'%></h1>
+  </row>
+  <hr>
+  <div class="form-group">
+    <form action="." method="." class="form-inline">
+      <input type="text" name="search" placeholder="タグ検索" class="form-control">
+          <input type="submit" value="検索" class="form-control">
+    </form>
+  </div>
+  <table class="table table-hover">
+    <tr>
+      <th>ID</th>
+      <th>タグ</th>
+      <th>操作</th>
+    </tr>
+    <% @tags.each do |i| %>
+      <tr>
+        <td><b><%= i.id %></b></td>
+        <td><%= link_to i.name, tag_path(i.id) %></td>
+        <td>
+          <%= link_to '編集', edit_tag_path(i.id), :class => 'btn btn-success btn-xs'%>
+          <%= link_to '削除', tag_path(i.id), :method => 'delete', :class => 'btn btn-danger btn-xs'%>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
