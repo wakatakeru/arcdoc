@@ -20,7 +20,7 @@ class TagController < ApplicationController
       flash[:success] = 'タグの新規作成に成功しました'
       redirect_to tag_index_path
     else
-      flash[:danger] = 'タグの新規作成に失敗しました'
+      flash[:danger] = 'タグ名が空です。新規作成できません。'
       redirect_to tag_index_path
     end
   end
@@ -35,10 +35,10 @@ class TagController < ApplicationController
     tag.name = params['tag']['name']
 
     if tag.save
-      flash[:success] = 'タグの新規作成に成功しました'
+      flash[:success] = 'タグの変更に成功しました'
       redirect_to tag_index_path
     else
-      flash[:danger] = 'タグの新規作成に失敗しました'
+      flash[:danger] = 'タグ名が空です。更新できません。'
       redirect_to tag_index_path
     end
   end

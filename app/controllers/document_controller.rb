@@ -21,8 +21,11 @@ class DocumentController < ApplicationController
       flash[:success] = "ドキュメントを保存しました"
       redirect_to document_index_path
     else
-      flash[:danger]  = "ドキュメントの保存に失敗しました"
-      redirect_to document_index_path
+      @document = Document.new
+      @document.title   = params['document']['title']
+      @document.content = params['document']['content']
+      flash[:danger]  = "タイトルが空です。保存できません"
+      render 'new'
     end
   end
 
@@ -40,8 +43,11 @@ class DocumentController < ApplicationController
       flash[:success] = "ドキュメントの更新に成功しました"
       redirect_to document_index_path
     else
-      flash[:danger] = "ドキュメントの更新に失敗しました"
-      redirect_to document_index_path
+      @document = Document.new
+      @document.title   = params['document']['title']
+      @document.content = params['document']['content']
+      flash[:danger] = "タイトルが空です。保存できません。"
+      redirect_to edit_document_path(params['id'])
     end
   end
 

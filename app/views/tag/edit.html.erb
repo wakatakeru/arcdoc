@@ -1,7 +1,7 @@
 <div class="container">
   <h1>タグの編集</h1>
   <hr>
-  <%= form_for @tag, :url => document_path(@document) do |f| %>
+  <%= form_for @tag, :url => tag_path(@tag) do |f| %>
     <div class="form-group">
       <%= f.label :title, 'タグ名', :class => 'control-label' %>
       <%= f.text_field :name, :class => 'form-control' %>
