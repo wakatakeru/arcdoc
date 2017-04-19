@@ -15,7 +15,8 @@ class TagController < ApplicationController
     tag = Tag.new
 
     tag.name = params['tag']['name']
-
+    tag.is_delete = true
+    
     if tag.save
       flash[:success] = 'タグの新規作成に成功しました'
       redirect_to tag_index_path
@@ -46,7 +47,7 @@ class TagController < ApplicationController
   def destroy
     tag = Tag.find(params[:id])
 
-    if tag.delete
+    if tag.is_delete && tag.destroy
       flash[:success] = 'タグの削除に成功しました'
       redirect_to tag_index_path
     else
