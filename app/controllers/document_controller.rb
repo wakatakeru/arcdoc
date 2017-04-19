@@ -18,9 +18,11 @@ class DocumentController < ApplicationController
     document.content = params['document']['content']
     
     if document.save
-      redirect_to root_path
+      flash[:success] = "ドキュメントを保存しました"
+      redirect_to document_index_path
     else
-      redirect_to root_path
+      flash[:danger]  = "ドキュメントの保存に失敗しました"
+      redirect_to document_index_path
     end
   end
 
@@ -29,28 +31,29 @@ class DocumentController < ApplicationController
   end
 
   def update
-    @document = Document.find(params['id'])
+    document = Document.find(params['id'])
     
-    @document.title   = params['document']['title']
-    @document.content = params['document']['content']
-   
-    if @document.save
-      redirect_to root_path
+    document.title   = params['document']['title']
+    document.content = params['document']['content']
+
+    if document.save
+      flash[:success] = "ドキュメントの更新に成功しました"
+      redirect_to document_index_path
     else
-      redirect_to root_path
+      flash[:danger] = "ドキュメントの更新に失敗しました"
+      redirect_to document_index_path
     end
   end
 
   def destroy
-    @document = Document.find(params['id'])
-    
-    if @document.destroy
-      redirect_to root_path
+    document = Document.find(params['id'])
+
+    if document.delete
+      flash[:success] = "ドキュメントの削除に成功しました"
+      redirect_to document_index_path
     else
-      redirect_to root_path
+      flash[:danger] = "ドキュメントの削除に失敗しました"
+      redirect_to document_index_path
     end
   end
 end
-
-
-
