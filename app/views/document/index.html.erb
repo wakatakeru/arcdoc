@@ -15,7 +15,7 @@
       <th>最終更新日時</th>
       <th>操作</th>
     </tr>
-    <% @document.each do |i| %>
+    <% @documents.each do |i| %>
       <tr>
         <td><%= link_to i.title, document_path(i.id) %></td>
         <td><%= i.updated_at %></td>
