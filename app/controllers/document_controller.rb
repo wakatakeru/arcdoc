@@ -18,14 +18,15 @@ class DocumentController < ApplicationController
   def create
     document = Document.new
     
-    document.title   = params['document']['title']
-    document.content = params['document']['content']
+    document.title     = params['document']['title']
+    document.content   = params['document']['content']
+    
     if params['document']['tag_id']
       document.tag_id  = params['document']['tag_id']
     else
       document.tag_id  = Tag.first.id
     end
-      
+
     if document.save
       flash[:success] = "ドキュメントを保存しました"
       redirect_to document_index_path
@@ -77,7 +78,9 @@ class DocumentController < ApplicationController
     end
   end
 
+  private
+  
   def login_check
-    is_login
+    redirect_to login_path unless is_login
   end
 end

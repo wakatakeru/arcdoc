@@ -60,7 +60,9 @@ class TagController < ApplicationController
     end
   end
 
+  private
+  
   def login_check
-    is_login
+    redirect_to login_path unless is_login
   end
 end

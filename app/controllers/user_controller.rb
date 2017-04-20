@@ -3,7 +3,7 @@ class UserController < ApplicationController
   before_filter :login_check, :expect => ['new', 'create']
   
   def index
-    user = User.find(session[:login_id].to_i)
+    user = User.find(session[:login_id])
     if user[:is_admin] == false
       flash[:alert] = "表示する権限がありません"
       redirect_to root_index_path
@@ -12,7 +12,7 @@ class UserController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id].to_i)
+    @user = User.find(params[:login_id])
   end
 
   def new
@@ -77,5 +77,12 @@ class UserController < ApplicationController
       redirect_to root_index_path
     end
   end
+
+  private
+
+  def login_check
+    is_login
+  end
+  
 end
 

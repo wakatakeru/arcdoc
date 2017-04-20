@@ -4,8 +4,8 @@ class RootController < ApplicationController
 
   def index
   end
-
+  
   def login_check
-    is_login
+    is_login 
   end
 end

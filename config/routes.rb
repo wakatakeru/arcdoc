@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
+  root 'login#new'
   get 'root/index'
-  root to: 'login#new'
   resource  :login, only: %i{show create destroy}
   resources :user
   resources :document

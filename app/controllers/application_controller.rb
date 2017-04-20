@@ -1,17 +1,16 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  helper_method :current_user, :is_login
+  
   def current_user
-    if session[:login_id]
-      @_current_user ||= User.find(session[:login_id])
-    end
+    return unless session[:login_id]
+    @current_user ||= User.find_by(:login_id => session[:login_id])
   end
 
   def is_login
-    if session[:login_id] != nil
-      redirect_to root_index_path
-    end
+    !!session[:login_id]
   end
 
-  helper_method :current_user
+
 end
