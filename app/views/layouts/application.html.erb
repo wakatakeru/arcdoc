@@ -31,7 +31,7 @@
           <% end %>
           <% if is_login %>
           <ul class="nav navbar-nav navbar-right">
-            <%= link_to 'ユーザ情報', user_path(current_user.id), :class => 'btn btn-info navbar-btn'%>
+            <%= link_to "#{current_user.screen_name}", user_path(current_user.id) %>さん
             <%= link_to 'ログアウト', '/login', :method => :delete, :class => 'btn btn-danger navbar-btn'%>
           </ul>
           <% end %>

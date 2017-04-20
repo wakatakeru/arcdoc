@@ -47,7 +47,7 @@ class UserController < ApplicationController
   end
 
   def edit
-    if current_user.id.to_i != params[:id].to_i && user[:is_admin] == false
+    if current_user.id.to_i != params[:id].to_i && current_user[:is_admin] == false
       flash[:danger] = "ページの表示権限がありません"
       redirect_to root_index_path
     end
@@ -57,10 +57,12 @@ class UserController < ApplicationController
   def update
     user = User.find(params[:id].to_i)
 
-    user.secreen_name          = params['user']['screen_name']
+    user.screen_name           = params['user']['screen_name']
     user.password              = params['user']['password']
     user.password_confirmation = params['user']['password_confirmation']
 
+    user.is_admin = params['user']['is_admin'] if params['user']['is_admin']
+    
     if user.save
       flash[:success] = "ユーザ情報を正常に変更しました"
       redirect_to root_index_path

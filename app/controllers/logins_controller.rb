@@ -10,7 +10,7 @@ class LoginsController < ApplicationController
       flash[:success] = "ログインに成功しました"
       redirect_to root_index_path
     else
-      flash[:alert] = "ログインに失敗しました"
+      flash[:danger] = "ログインに失敗しました"
       render 'new'
     end
   end
