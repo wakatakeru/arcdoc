@@ -6,6 +6,6 @@ class RootController < ApplicationController
   end
   
   def login_check
-    is_login 
+    redirect_to login_path unless is_login
   end
 end

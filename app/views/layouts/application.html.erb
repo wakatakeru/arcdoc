@@ -19,22 +19,30 @@
           </button>
           <%= link_to 'ArCdoc', '/root/index', :class => 'navbar-brand' %>
         </div>
-
         <div class="collapse navbar-collapse" id="navbarMain">
+          <% if is_login %>
           <ul class="nav navbar-nav">
-            <li><%= link_to 'ドキュメント一覧', '/document', :class => 'navbar-brand' %></li>
-            <li><%= link_to 'タグ一覧', '/tag', :class => 'navbar-brand' %></li>
-            <li><%= link_to 'ユーザ管理', '/user', :class => 'navbar-brand' %></li>
+            <li><%= link_to 'ドキュメント一覧', '/document' %></li>
+            <li><%= link_to 'タグ一覧', '/tag' %></li>
+            <% if current_user.is_admin == true %>
+            <li><%= link_to 'ユーザ管理', '/user' %></li>
+            <% end %>
           </ul>
+          <% end %>
+          <% if is_login %>
+          <ul class="nav navbar-nav navbar-right">
+            <%= link_to 'ユーザ情報', user_path(current_user.id), :class => 'btn btn-info navbar-btn'%>
+            <%= link_to 'ログアウト', '/login', :method => :delete, :class => 'btn btn-danger navbar-btn'%>
+          </ul>
+          <% end %>
         </div>
       </div>
     </nav>
     <div class="container">
       <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
       <% end %>
     </div>
-
     <%= yield %>
   </body>
 </html>

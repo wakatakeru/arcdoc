@@ -1,6 +1,9 @@
 <div class="container">
-  <h1>ドキュメント詳細</h1>
+  <h1>
+    ドキュメント詳細 <small>Tag: <%= @document.tag.name %></small><%= link_to '編集', edit_document_path(@document.id), :class => 'btn btn-success pull-right'%>
+  </h1>
   <hr>
   <h2><%= @document.title %></h2>
   <%= simple_format(@document.content) %>
 </div>
+

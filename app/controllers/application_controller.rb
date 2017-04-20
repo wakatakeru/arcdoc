@@ -5,12 +5,10 @@ class ApplicationController < ActionController::Base
   
   def current_user
     return unless session[:login_id]
-    @current_user ||= User.find_by(:login_id => session[:login_id])
+    @current_user = User.find_by(:id => session[:login_id])
   end
 
   def is_login
     !!session[:login_id]
   end
-
-
 end

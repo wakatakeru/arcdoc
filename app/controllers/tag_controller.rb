@@ -12,10 +12,19 @@ class TagController < ApplicationController
   end
 
   def new
+    if current_user.is_admin == false
+      flash[:danger] = "表示する権限がありません"
+      redirect_to tag_index_path
+    end
     @tag = Tag.new
   end
 
   def create
+    if current_user.is_admin == false
+      flash[:danger] = "表示する権限がありません"
+      redirect_to tag_index_path
+    end
+
     tag = Tag.new
 
     tag.name = params['tag']['name']
@@ -31,14 +40,24 @@ class TagController < ApplicationController
   end
   
   def edit
+    if current_user.is_admin == false
+      flash[:danger] = "表示する権限がありません"
+      redirect_to tag_index_path
+    end
+    
     @tag = Tag.find(params[:id])
   end
-
+  
   def update
+    if current_user.is_admin == false
+      flash[:danger] = "表示する権限がありません"
+      redirect_to tag_index_path
+    end
+
     tag = Tag.find(params[:id])
-
+    
     tag.name = params['tag']['name']
-
+    
     if tag.save
       flash[:success] = 'タグの変更に成功しました'
       redirect_to tag_index_path
@@ -49,6 +68,11 @@ class TagController < ApplicationController
   end
   
   def destroy
+    if current_user.is_admin == false
+      flash[:danger] = "表示する権限がありません"
+      redirect_to tag_index_path
+    end
+
     tag = Tag.find(params[:id])
 
     if tag.is_delete && tag.destroy

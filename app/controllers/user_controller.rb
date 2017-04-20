@@ -1,9 +1,9 @@
 class UserController < ApplicationController
 
-  before_filter :login_check, :expect => ['new', 'create']
+  before_filter :login_check, :only => ['index', 'show', 'edit', 'update', 'destroy']
   
   def index
-    user = User.find(session[:login_id])
+    user = User.find(current_user.id)
     if user[:is_admin] == false
       flash[:danger] = "表示する権限がありません"
       redirect_to root_index_path
@@ -12,6 +12,10 @@ class UserController < ApplicationController
   end
 
   def show
+    if current_user.id.to_i != params[:id].to_i && current_user.is_admin == false
+      flash[:danger] = "表示する権限がありません"
+      redirect_to root_index_path
+    end
     @user = User.find(params[:id])
   end
 
@@ -43,7 +47,7 @@ class UserController < ApplicationController
   end
 
   def edit
-    if session[:login_id].to_i != params[:id].to_i
+    if current_user.id.to_i != params[:id].to_i && user[:is_admin] == false
       flash[:danger] = "ページの表示権限がありません"
       redirect_to root_index_path
     end
@@ -68,10 +72,16 @@ class UserController < ApplicationController
   end
 
   def destroy
+    user = User.find(session[:login_id])
+    if user[:is_admin] == false
+      flash[:danger] = "表示する権限がありません"
+      redirect_to root_index_path
+    end
+
     user = User.find(params[:id].to_i)
     if !User.all.empty? && user.is_admin != true && user.destroy
       flash[:success] = "ユーザを正常に削除しました"
-      redirect_to login_path
+      redirect_to user_index_path
     else
       flash[:danger] = "ユーザを削除できません"
       redirect_to user_index_path
@@ -81,7 +91,7 @@ class UserController < ApplicationController
   private
 
   def login_check
-    is_login
+    redirect_to login_path unless is_login
   end
   
 end
