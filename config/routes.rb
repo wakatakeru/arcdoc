@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'login#new'
+  root 'logins#new'
   get 'root/index'
   resource  :login, only: %i{show create destroy}
   resources :user

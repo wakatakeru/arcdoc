@@ -3,7 +3,7 @@ class DocumentController < ApplicationController
   before_action :login_check
 
   def index
-    @documents = Document.all
+    @documents = Document.search(:title_cont => params[:q]).result
   end
 
   def show

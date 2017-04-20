@@ -8,7 +8,7 @@ class UserController < ApplicationController
       flash[:danger] = "表示する権限がありません"
       redirect_to root_index_path
     end
-    @users = User.all
+    @users = User.search(:login_id_cont => params[:q]).result
   end
 
   def show

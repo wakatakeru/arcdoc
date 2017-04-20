@@ -3,7 +3,7 @@ class TagController < ApplicationController
   before_action :login_check
   
   def index
-    @tags = Tag.all
+    @tags = Tag.search(:name_cont => params[:q]).result
   end
 
   def show
