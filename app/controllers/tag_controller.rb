@@ -1,4 +1,7 @@
 class TagController < ApplicationController
+
+  before_action :login_check
+  
   def index
     @tags = Tag.all
   end
@@ -55,5 +58,9 @@ class TagController < ApplicationController
       flash[:danger] = 'タグの削除に失敗しました'
       redirect_to tag_index_path
     end
+  end
+
+  def login_check
+    is_login
   end
 end

@@ -1,4 +1,7 @@
 class DocumentController < ApplicationController
+
+  before_action :login_check
+
   def index
     @documents = Document.all
   end
@@ -72,5 +75,9 @@ class DocumentController < ApplicationController
       flash[:danger] = "ドキュメントの削除に失敗しました"
       redirect_to document_index_path
     end
+  end
+
+  def login_check
+    is_login
   end
 end
