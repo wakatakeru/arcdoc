@@ -9,14 +9,20 @@ class DocumentController < ApplicationController
   
   def new
     @document = Document.new
+    @tags = Tag.all
   end
 
   def create
     document = Document.new
-
+    
     document.title   = params['document']['title']
     document.content = params['document']['content']
-    
+    if params['document']['tag_id']
+      document.tag_id  = params['document']['tag_id']
+    else
+      document.tag_id  = Tag.first.id
+    end
+      
     if document.save
       flash[:success] = "ドキュメントを保存しました"
       redirect_to document_index_path
@@ -38,6 +44,11 @@ class DocumentController < ApplicationController
     
     document.title   = params['document']['title']
     document.content = params['document']['content']
+    if params['document']['tag_id']
+      document.tag_id  = params['document']['tag_id']
+    else
+      document.tag_id  = Tag.first.id
+    end
 
     if document.save
       flash[:success] = "ドキュメントの更新に成功しました"
@@ -54,7 +65,7 @@ class DocumentController < ApplicationController
   def destroy
     document = Document.find(params['id'])
 
-    if document.delete
+    if document.destroy
       flash[:success] = "ドキュメントの削除に成功しました"
       redirect_to document_index_path
     else

@@ -20,8 +20,10 @@
         <td><b><%= i.id %></b></td>
         <td><%= link_to i.name, tag_path(i.id) %></td>
         <td>
-          <%= link_to '編集', edit_tag_path(i.id), :class => 'btn btn-success btn-xs'%>
-          <%= link_to '削除', tag_path(i.id), :method => 'delete', :class => 'btn btn-danger btn-xs'%>
+          <% if i.id != @tags.first.id %>
+            <%= link_to '編集', edit_tag_path(i.id), :class => 'btn btn-success btn-xs'%>
+            <%= link_to '削除', tag_path(i.id), :method => 'delete', :class => 'btn btn-danger btn-xs', data: {confirm: 'タグに関連付けられたデータも削除されます。よろしいですか？'}%>
+          <% end %>
         </td>
       </tr>
     <% end %>
