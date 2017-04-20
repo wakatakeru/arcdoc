@@ -65,7 +65,7 @@ class UserController < ApplicationController
     
     if user.save
       flash[:success] = "ユーザ情報を正常に変更しました"
-      redirect_to root_index_path
+      redirect_to user_index_path
     else
       flash[:danger] = "ユーザが登録できませんでした。パスワードが一致しません"
       @user = user
