@@ -11,6 +11,6 @@
   </h1>
   <hr>
   <h2><%= @document.title %></h2>
-  <%= simple_format(@document.content) %>
+  <%= sanitize(simple_format(@document.content)) %>
 </div>
 
