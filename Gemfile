@@ -61,3 +61,6 @@ gem 'pg'
 
 # KeyWordSearch
 gem 'ransack'
+
+# OutPutPDF
+gem 'prawn'
