@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 20170418160917) do
   create_table "documents", force: :cascade do |t|
     t.string   "title",      null: false
     t.text     "content"
-    t.string   "user_id"
     t.integer  "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
