@@ -83,7 +83,6 @@ class DocumentController < ApplicationController
                :size => 10, :at => [30, 700], :width => 470, :height => 680
     end
 
-    flash[:info] = "PDFファイルをダウンロードします"
     send_data(out.render, :filename => "#{document.title}.pdf")
   end
   
