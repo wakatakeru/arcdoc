@@ -66,6 +66,28 @@ class DocumentController < ApplicationController
     end
   end
 
+  def download
+    document = Document.find(params['id'].to_i)
+    title = document.title
+    out = Prawn::Document.new(:page_size => 'A4') do
+      font "app/assets/fonts/light.ttf"
+      
+      draw_text "#{document.title}" ,
+                :size => 20, :at => [30, 740]
+      stroke_color 'A4A4A4'
+      stroke_horizontal_line 0, 540, :at=> 730
+
+      font "app/assets/fonts/regular.ttf"
+      
+      text_box "#{document.content}" ,
+               :size => 10, :at => [30, 700], :width => 470, :height => 680
+    end
+
+    send_data(out.render, :filename => "#{document.title}.pdf")
+
+    flash[:info] = 'PDFファイルをダウンロードします'
+  end
+  
   def destroy
     document = Document.find(params['id'])
 

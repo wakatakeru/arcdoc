@@ -23,8 +23,9 @@
         <td><%= link_to i.tag.name, tag_path(i.tag.id) %></td>
         <td>
           <%= link_to '編集', edit_document_path(i.id), :class => 'btn btn-success btn-xs'%>
+          <%= link_to 'PDF出力', "document/#{i.id}/download", :class => 'btn btn-info btn-xs'%>
           <% if current_user.is_admin == true %>
-            <%= link_to '削除', document_path(i.id), :method => 'delete', :class => 'btn btn-danger btn-xs', data: {confirm: "#{i.title}を削除します。よろしいですか？"} %>
+          <%= link_to '削除', document_path(i.id), :method => 'delete', :class => 'btn btn-danger btn-xs', data: {confirm: "#{i.title}を削除します。よろしいですか？"} %>
           <% end %>
         </td>
       </tr>
